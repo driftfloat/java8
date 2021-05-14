@@ -106,6 +106,10 @@ public class TestStreamaAPI {
 			.forEach(System.out::println);
 	}
 	
+	/*
+	 * distinct() 筛选，通过流所生成元素的hashCode() 和equals() 去除重复元素
+	 * Employee需要覆盖Object类的的hashCode() 和equals() 
+	 */
 	@Test
 	public void test6(){
 		emps.stream()

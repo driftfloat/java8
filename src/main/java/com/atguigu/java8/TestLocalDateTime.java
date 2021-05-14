@@ -47,7 +47,7 @@ public class TestLocalDateTime {
 		
 		System.out.println(strDate);
 		
-		LocalDateTime newLdt = ldt.parse(strDate, dtf);
+		LocalDateTime newLdt = LocalDateTime.parse(strDate, dtf);
 		System.out.println(newLdt);
 	}
 	

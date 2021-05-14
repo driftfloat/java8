@@ -13,60 +13,70 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public class TestSimpleDateFormat {
-	
-	public static void main(String[] args) throws Exception {
-		
-		/*SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		
+
+	public static void old() throws Exception {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+
 		Callable<Date> task = new Callable<Date>() {
 
 			@Override
 			public Date call() throws Exception {
 				return sdf.parse("20161121");
 			}
-			
+
 		};
 
 		ExecutorService pool = Executors.newFixedThreadPool(10);
-		
+
 		List<Future<Date>> results = new ArrayList<>();
-		
+
 		for (int i = 0; i < 10; i++) {
 			results.add(pool.submit(task));
 		}
-		
+
 		for (Future<Date> future : results) {
 			System.out.println(future.get());
 		}
-		
-		pool.shutdown();*/
-		
-		//解决多线程安全问题
-		/*Callable<Date> task = new Callable<Date>() {
 
-			@Override
-			public Date call() throws Exception {
-				return DateFormatThreadLocal.convert("20161121");
-			}
-			
-		};
+		pool.shutdown();
 
-		ExecutorService pool = Executors.newFixedThreadPool(10);
-		
-		List<Future<Date>> results = new ArrayList<>();
-		
-		for (int i = 0; i < 10; i++) {
-			results.add(pool.submit(task));
-		}
-		
-		for (Future<Date> future : results) {
-			System.out.println(future.get());
-		}
-		
-		pool.shutdown();*/
-		
+	}
+
+	public static void main(String[] args) throws Exception {
+//		old();
+		old2();
+//		newdate();
+	}
+	
+	public static void old2() throws Exception {
+//		 解决多线程安全问题
+				 Callable<Date> task = new Callable<Date>() {
+				
+				 @Override
+				 public Date call() throws Exception {
+				 return DateFormatThreadLocal.convert("20161121");
+				 }
+				
+				 };
+				
+				 ExecutorService pool = Executors.newFixedThreadPool(10);
+				
+				 List<Future<Date>> results = new ArrayList<>();
+				
+				 for (int i = 0; i < 10; i++) {
+				 results.add(pool.submit(task));
+				 }
+				
+				 for (Future<Date> future : results) {
+				 System.out.println(future.get());
+				 }
+				
+				 pool.shutdown();
+	}
+
+	public static void newdate() throws Exception {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
-		
+
 		Callable<LocalDate> task = new Callable<LocalDate>() {
 
 			@Override
@@ -74,21 +84,21 @@ public class TestSimpleDateFormat {
 				LocalDate ld = LocalDate.parse("20161121", dtf);
 				return ld;
 			}
-			
+
 		};
 
 		ExecutorService pool = Executors.newFixedThreadPool(10);
-		
+
 		List<Future<LocalDate>> results = new ArrayList<>();
-		
+
 		for (int i = 0; i < 10; i++) {
 			results.add(pool.submit(task));
 		}
-		
+
 		for (Future<LocalDate> future : results) {
 			System.out.println(future.get());
 		}
-		
+
 		pool.shutdown();
 	}
 

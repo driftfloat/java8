@@ -129,6 +129,7 @@ public class TestLambda1 {
 	public void test6(){
 		List<Employee> list = filterEmployee(emps, (e) -> e.getAge() <= 35);
 		list.forEach(System.out::println);
+//		list.forEach(System.out.println());
 		
 		System.out.println("------------------------------------------");
 		

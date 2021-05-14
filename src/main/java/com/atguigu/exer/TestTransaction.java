@@ -76,6 +76,15 @@ public class TestTransaction {
 		
 		System.out.println(str);
 		
+		System.out.println("-----------------------------------");
+		
+		str = transactions.stream()
+					.map((t) -> t.getTrader().getName()+", ") 
+					.sorted()
+					.reduce("", String::concat);
+		
+		System.out.println(str);
+		
 		System.out.println("------------------------------------");
 		
 		transactions.stream()

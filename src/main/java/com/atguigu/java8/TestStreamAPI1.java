@@ -49,7 +49,7 @@ public class TestStreamAPI1 {
 		stream.forEach(System.out::println);
 		
 		Stream<Stream<Character>> stream2 = strList.stream()
-			   .map(TestStreamAPI1::filterCharacter);
+			   .map(TestStreamAPI1::filterCharacter);    //流中流 {{a, a, a}, {b, b, b}, {c, c, c}, {d, d, d}, {e, e, e}}
 		
 		stream2.forEach((sm) -> {
 			sm.forEach(System.out::println);
@@ -58,7 +58,7 @@ public class TestStreamAPI1 {
 		System.out.println("---------------------------------------------");
 		
 		Stream<Character> stream3 = strList.stream()
-			   .flatMap(TestStreamAPI1::filterCharacter);
+			   .flatMap(TestStreamAPI1::filterCharacter); // {a, a, a, b, b, b, c, c, c, d, d, d, e, e, e}
 		
 		stream3.forEach(System.out::println);
 	}
@@ -95,4 +95,13 @@ public class TestStreamAPI1 {
 				}
 			}).forEach(System.out::println);
 	}
+	
+	@Test
+	public void test3() {
+		emps.stream()
+//		.map(Employee::getName)
+		.map((e) -> e.getName())
+		.forEach(System.out::println);
+	}
+	                    
 }
